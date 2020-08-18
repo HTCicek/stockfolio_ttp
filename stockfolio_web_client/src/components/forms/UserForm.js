@@ -13,6 +13,8 @@ import {
 
 import { logIn } from '../../app/redux/authSlice'
 
+import { updatePortfolio } from '../../app/redux/stockSlice'
+
 import { useHistory } from 'react-router-dom'
 
 import { Grid, TextField, Button, makeStyles, Typography } from '@material-ui/core'
@@ -82,11 +84,17 @@ const UserForm = (props) => {
   }
 
   const successfulLogin = data => {
-    console.dir(data) // data.user.data.attributes, and data.token
+    console.log("this is the successful login data receipt: ")
+    console.dir(data)
     const { token } = data
     const { name } = data.user
-    const payload = {name, token}
-    dispatch(logIn(payload))
+    const balance = parseInt(data.user.balance, 10)
+
+    const { current_value: currentValue, stocks} = data.user.portfolio
+    const authPayload = {token, name, balance}
+    const stocksPayload = {currentValue, stocks}
+    dispatch(logIn(authPayload))
+    dispatch(updatePortfolio(stocksPayload))
     history.push('/portfolio')
   }
 

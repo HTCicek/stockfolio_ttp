@@ -5,6 +5,11 @@ class Portfolio < ApplicationRecord
   def add(symbol:, quantity:)
     api = IexWrapper.new(test: true)
     resp = api.quote(symbol)
+
+    # couldn't think of a better data validtion:
+    # IEX seems to return a couple of different errors depending on
+    # the length of the symbol, or maybe whether it has data on a specific symbol
+    # instead of enumerating over every error I could find, this has been working.
     if resp.body.length < 20
       errors.add(:symbol, "No such symbol")
     else
@@ -26,9 +31,9 @@ class Portfolio < ApplicationRecord
     end
   end
 
-  def stocks_by_quantity
-    stocks_by_symbol.frequency
-  end
+  # def stocks_by_quantity
+    # stocks_by_symbol.frequency
+  # end
 
   def stocks_by_symbol
     stocks.map{|stock| stock.symbol}
@@ -44,6 +49,7 @@ class Portfolio < ApplicationRecord
     value = 0
     stocks.each do |stock|
       stock.quote = parsed_resp["#{stock.symbol}"]["quote"]
+      # should be an integer already
       value += stock.latest_price * 100 # gotta be in cents
     end
     value

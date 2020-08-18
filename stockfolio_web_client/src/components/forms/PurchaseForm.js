@@ -8,7 +8,9 @@ import {getSymbol} from '../../app/tickerSymbolAdapter'
 import {purchaseStock} from '../../app/backendAdapter'
 
 import {useSelector, useDispatch} from 'react-redux'
+import {updateBalance} from '../../app/redux/authSlice'
 import { changeQuantity, changeSymbol, selectQty, selectSym } from '../../app/redux/purchaseSlice'
+import { updatePortfolio } from '../../app/redux/stockSlice'
 
 const useStyles = makeStyles( theme => ({
   submit: {
@@ -59,7 +61,11 @@ const PurchaseForm = () => {
           setError(true)
           setMessages(data.errors)
         } else {
-          console.log(data)
+          const { current_value: currentValue, stocks} = data.user.portfolio
+          const stocksPayload = {currentValue, stocks}
+          const balance = parseInt(data.user.balance, 10)
+          dispatch(updateBalance({balance}))
+          dispatch(updatePortfolio(stocksPayload))
         }
       })
       .catch(console.error)
@@ -88,7 +94,12 @@ const PurchaseForm = () => {
     }
   }
 
-  const autoHandler = (e, val) => {
+  const autoHandler = (_e, val) => {
+    // This handler takes care of the selection of a 
+    // ticker symbol
+    // because it's a controlled input that we're calling the backend with
+    // we need to update the value in the case that the user
+    // doesn't type in the full symbol
     dispatch(changeSymbol(val.symbol))
   }
   const errorBox = (messages) => {

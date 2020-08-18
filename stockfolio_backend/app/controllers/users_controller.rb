@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         token: token,
         user: user_json(user: user),
       }
-
+    else
       error_json(user)
     end
   end

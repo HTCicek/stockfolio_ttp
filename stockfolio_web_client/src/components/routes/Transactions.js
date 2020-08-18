@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import { Grid, makeStyles } from '@material-ui/core'
+import TransactionTable from '../table/TransactionTable';
 
 const useStyles = makeStyles( theme => ({
   table: {
@@ -19,8 +20,8 @@ const Transactions = () => {
         </title>
       </Helmet>
       <Grid container item direction="row" alignItems="center" justify="space-around" className={classes.table}>
-        <Grid item xs={12}>
-
+        <Grid item xs={10}>
+          <TransactionTable />
         </Grid>
       </Grid>
     </>

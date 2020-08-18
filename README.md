@@ -1,6 +1,8 @@
 # Stockfolio
 
-**BLUF** Image is on dockerhub
+**BLUF** Please build locally, `docker-compose` isn't fully up and running yet.
+
+`username: htcicek@email.com password: 1234`, or create your own.
 
 ## Table of Contents
 
@@ -100,15 +102,13 @@ Backend service is built as a Rails API, documentation in ./stockfolio_backend
 
 #### Backend Libraries
 
-- jsonapi.rb
+- Blueprinter
   - Serializing Models for front end consumption
   - Deserializing external api calls for model generation
 - JWT
   - Secure tokens used for client authentication and authorization
 - Faraday
   - HTTP Client used for abstraction of external API calls
-- Money
-  - Library to safely parse and work with currency
 
 ### Symbol Service
 
@@ -116,22 +116,22 @@ Built using Sinatra. Pulls up-to-date symbol data from ftp.nasdaqtrader.com in o
 
 ## User Stories
 
-- [ ] As a user, I want to create a new account with my name, email, and password so that I can buy and trade stocks.
+- [x] As a user, I want to create a new account with my name, email, and password so that I can buy and trade stocks.
   - [x] Default the user's cash account balance to \$5_000.00 USD
   - [x] A user can only register once with any given email.
-- [ ] As a user, I want to authenticate via email and password so that I can access my account.
-- [ ] As a user, I want to buy shares of stock at its curent price by specifying its ticker symbol and the number of shares so that I can invest.
-  - [ ] A user can only buy whole number quantities of shares.
-  - [ ] A user can only buy shares if they have enough cash in their account for a given purchase
-  - [ ] A user can only buy shares if the ticker symbol is valid
-- [ ] As a user, I want to view a list of all transactions I've made to date (trades) so that I can perform an audit.
-- [ ] As a user, I want to view my portfolio (a list of all the stocks I own along with their current values) so that I can review performance
-  - [ ] Current values should be based on the latest price and quantity owned for a given stock
-  - [ ] Each stock owned should only appear once
-- [ ] As a user, I'd like to see the font color of stock symbols and current prices in my portfolio change dynamically to indicate performance.
-  - [ ] Display red when the current price is less that the day's open price
-  - [ ] Display grey when the current price is equal to the day's open price
-  - [ ] Display green when the current price is greater than the day's open price
+- [x] As a user, I want to authenticate via email and password so that I can access my account.
+- [x] As a user, I want to buy shares of stock at its curent price by specifying its ticker symbol and the number of shares so that I can invest.
+  - [x] A user can only buy whole number quantities of shares.
+  - [x] A user can only buy shares if they have enough cash in their account for a given purchase
+  - [x] A user can only buy shares if the ticker symbol is valid
+- [x] As a user, I want to view a list of all transactions I've made to date (trades) so that I can perform an audit.
+- [x] As a user, I want to view my portfolio (a list of all the stocks I own along with their current values) so that I can review performance
+  - [x] Current values should be based on the latest price and quantity owned for a given stock
+  - [x] Each stock owned should only appear once
+- [x] As a user, I'd like to see the font color of stock symbols and current prices in my portfolio change dynamically to indicate performance.
+  - [x] Display red when the current price is less that the day's open price
+  - [x] Display grey when the current price is equal to the day's open price
+  - [x] Display green when the current price is greater than the day's open price
 
 ## Prospective
 

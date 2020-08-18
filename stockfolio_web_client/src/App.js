@@ -10,6 +10,7 @@ import SignIn from './components/routes/SignIn'
 import { Grid } from '@material-ui/core';
 
 import { useSelector, useDispatch } from 'react-redux'
+import { updatePortfolio, logOutPortfolio } from './app/redux/stockSlice'
 import { isLoggedIn, logOut, logIn } from './app/redux/authSlice'
 import {getCurrentUser} from './app/backendAdapter'
 
@@ -31,15 +32,23 @@ function App() {
         if (data.errors){
           console.error(data.errors)
           dispatch(logOut())
+          dispatch(logOutPortfolio())
         } else {
           const { token } = data
           const { name } = data.user
-          const authPayload = {token, name}
+          const balance = parseInt(data.user.balance, 10)
+          const { current_value: currentValue, stocks} = data.user.portfolio
+          const authPayload = {token, name, balance}
+          const stocksPayload = {currentValue, stocks}
           dispatch(logIn(authPayload))
+          dispatch(updatePortfolio(stocksPayload))
         }
       })
     }
-    return (() => dispatch(logOut()))}, [])
+    return (() => {
+      dispatch(logOutPortfolio())
+      dispatch(logOut())
+    })}, [])
 
   const loggedIn = useSelector(isLoggedIn)
 

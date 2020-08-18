@@ -13,15 +13,16 @@ class Stock < ApplicationRecord
     @quote ||= some_hash
   end
 
+  # too many random floating points for my liking
   def latest_price
-    @latest_price = quote["latestPrice"] * 100
+    @latest_price = (quote["latestPrice"] * 100).to_i
   end
   
   def compare_price
     if quote["open"]
-      @compare_price = quote["open"] * 100
+      @compare_price = (quote["open"] * 100).to_i
     else
-      @compare_price = quote["previousClose"] * 100
+      @compare_price = (quote["previousClose"] * 100).to_i
     end
   end
 

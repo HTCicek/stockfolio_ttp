@@ -29,4 +29,4 @@ EXPOSE 4000
 WORKDIR /app
 RUN bundle install
 RUN RAILS_ENV=production
-RUN rails db:migrate
+RUN rails db:migrate db:seed

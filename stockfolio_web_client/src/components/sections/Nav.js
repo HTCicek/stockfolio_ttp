@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 
 import {selectName, isLoggedIn, logOut} from '../../app/redux/authSlice'
+import {logOutPortfolio} from '../../app/redux/stockSlice'
 
 import { AppBar, Toolbar, Tabs, Typography, IconButton, Grid } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -20,6 +21,7 @@ const Nav = () => {
   const logOutHandler = e => {
     e.preventDefault()
     dispatch(logOut())
+    dispatch(logOutPortfolio())
     history.push("/")
   }
   

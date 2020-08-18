@@ -20,7 +20,7 @@ gem 'blueprinter'
 gem 'faraday'
 
 # Finances are always difficult to work with, using a library saves the headache of implementation
-gem 'money'
+# gem 'money'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
