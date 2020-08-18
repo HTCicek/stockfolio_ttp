@@ -1,16 +1,20 @@
 # Stockfolio
 
-**BLUF** pull it up with docker-compose
+**BLUF** Image is on dockerhub
 
 ## Table of Contents
 
 - [Motivation](#motivation)
+- [Build](#build)
+  - [docker-compose](#`docker-compose`)
+  - [local](#local)
 - [Tech Stack](#tech-stack)
-  - [Web Client](#web-client)
+  - [React Web Client](#react-web-client)
     - [Design & Style Guide](#design-&-style-guide)
     - [Web Client Libraries](#web-client-libraries)
   - [Backend Storage and Authentication Service](#backend-storage-and-authentication-service)
     - [Backend Libraries](#backend-libraries)
+  - [Symbol Searching Service](#symbol-service)
 - [User Stories](#user-stories)
 - [Prospective](#prospective)
   - [Client-side](#client)
@@ -21,11 +25,44 @@
 
 This was created for the SBS Tech Talent Pipeline 2nd round assessment.
 
+## Build
+
+### `docker-compose`
+
+```sh
+docker-compose build && docker-compose up
+```
+
+access web client from `localhost:3000`
+
+### local
+
+#### Symbol service
+
+```sh
+cd ./stockfolio_symbol_service && bundle install
+bundle exec ruby application.rb -p 4567 -s Puma -e production
+```
+
+#### Backend service
+
+```sh
+cd ./stockfolio_backend && bundle install && rails db:migrate
+rails s -p 4000 -b '0.0.0.0'
+```
+
+#### Web Client
+
+```sh
+cd ./stockfolio_web_client && yarn install
+yarn start -a localhost -p 3000
+```
+
 ## Tech Stack
 
 Stockfolio is a React.js front end with a Ruby on Rails back end. The persistence layer is handled via the ActiveRecord ORM in Rails and SQLite.
 
-### Web Client
+### React Web Client
 
 Web Client built using React, bootstrapped with the create-react-app redux template.
 
@@ -38,8 +75,8 @@ Web Client built using React, bootstrapped with the create-react-app redux templ
 | Page         | Route         |
 | ------------ | ------------- |
 | Root         | /             |
-| Login        | /login        |
-| Sign-Up      | /sign-up      |
+| sign-in        | /sign-in        |
+| Register      | /register      |
 | Transactions | /transactions |
 | Portfolio    | /portfolio    |
 
@@ -47,12 +84,12 @@ Web Client built using React, bootstrapped with the create-react-app redux templ
 
 - Redux
   - State management
-- Styled-Components
-  - Declarative component creation, and maintain
+- Material-UI
+  - Composable UI Library 
 - React Router Dom
-  - Used to define endpoints and switch pages
-- Helmet?
-  - Just to keep everything in one file?
+  - Used to define endpoints/switch pages
+- react-helmet
+  - html head management with JSX
 - Sanitize.css
   - Normalization of CSS for support across all browsers
   - Opinionated removal of some silly margins and unintunitive defaults
@@ -73,11 +110,15 @@ Backend service is built as a Rails API, documentation in ./stockfolio_backend
 - Money
   - Library to safely parse and work with currency
 
+### Symbol Service
+
+Built using Sinatra. Pulls up-to-date symbol data from ftp.nasdaqtrader.com in order to provide a list of "real" tickers for a first-wave front-end validation. There is another validation on the backend layer when actually purchasing, but this allows for a better user experience.
+
 ## User Stories
 
 - [ ] As a user, I want to create a new account with my name, email, and password so that I can buy and trade stocks.
-  - [ ] Default the user's cash account balance to \$5_000.00 USD
-  - [ ] A user can only register once with any given email.
+  - [x] Default the user's cash account balance to \$5_000.00 USD
+  - [x] A user can only register once with any given email.
 - [ ] As a user, I want to authenticate via email and password so that I can access my account.
 - [ ] As a user, I want to buy shares of stock at its curent price by specifying its ticker symbol and the number of shares so that I can invest.
   - [ ] A user can only buy whole number quantities of shares.

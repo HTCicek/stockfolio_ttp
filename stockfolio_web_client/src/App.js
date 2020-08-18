@@ -1,57 +1,74 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+import Register from './components/routes/Register'
+import Transactions from './components/routes/Transactions'
+import Portfolio from './components/routes/Portfolio'
+import Welcome from './components/routes/Welcome'
+import SignIn from './components/routes/SignIn'
+import { Grid, AppBar, Toolbar } from '@material-ui/core';
+
+import { useSelector } from 'react-redux'
+import { isLoggedIn } from './app/redux/authSlice'
+// import {getCurrentUser} from './app/backendAdapter'
+import PrivateRoute from './components/routes/PrivateRoute';
 
 function App() {
+
+  // const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   if (localStorage.getItem('token')) {
+  //     getCurrentUser()
+  //     .then(res => res.json())
+  //     .then( data => {
+  //       if (data.errors){
+  //         console.error(data.errors)
+  //       } else {
+  //         const { token } = localStorage.getItem('token')
+  //         const { name } = data.user.data.attributes
+  //         const payload = {token, name}
+  //         dispatch(logIn(payload))
+  //       }
+  //     })
+  //   }
+  //   return (() => dispatch(logOut))}, [])
+
+  const loggedIn = useSelector(isLoggedIn)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>
+      <AppBar position="static">
+        <Toolbar>
+
+        </Toolbar>
+      </AppBar>
+      <Grid container direction="row" alignItems="center" justify="center">
+        <Switch>
+
+          <PrivateRoute path="/transactions" component={Transactions}/>
+          <PrivateRoute path="/portfolio" component={Portfolio} />
+
+          <Route path="/register">
+            {loggedIn ? <Redirect to="/portfolio" /> : <Register />}
+          </Route>
+          
+          <Route path="/sign-in">
+            {loggedIn ? <Redirect to="/portfolio" /> : <SignIn />}
+          </Route>
+
+          <Route path="/welcome">
+            {loggedIn ? <Redirect to="/portfolio" /> : <Welcome />}
+          </Route>
+
+          <Route path="/">
+            <Redirect to="/welcome" />
+          </Route>
+
+        </Switch>
+      </Grid>
+    </>
   );
 }
 
