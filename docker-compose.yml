@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  symbol_service:
+    build: ./stockfolio_symbol_service 
+      # context: ./stockfolio_symbol_service 
+      # dockerfile: Dockerfile
+    hostname: symbol_service
+    command: bundle exec ruby application.rb -p 4567 -s Puma -e production
+    ports:
+      - "4567:4567"
+  backend:
+    build: ./stockfolio_backend 
+      # context: ./stockfolio_backend 
+      # dockerfile: Dockerfile
+    hostname: backend
+    environment:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: 'true'
+    command: rails s -p 4000 -b '0.0.0.0'
+    ports:
+      - "4000:4000"
+  web_client:
+    build: ./stockfolio_web_client
+      # context: ./stockfolio_web_client
+      # dockerfile: Dockerfile
+    hostname: web_client
+    command: ["nginx", "-g", "daemon off;"]
+    depends_on:
+      - symbol_service
+      - backend
+    ports:
+      - "3000:80"
