@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-// import { AutoComplete } from '@material-ui/lab';
-import { Grid, makeStyles, TextField, Button } from '@material-ui/core'
+import React, {useState, useEffect} from 'react';
+import { Autocomplete } from '@material-ui/lab';
 
-// import getSymbol from '../../app/tickerSymbolAdapter'
+
+import { Grid, makeStyles, TextField, Button, CircularProgress, Typography } from '@material-ui/core'
+
+import {getSymbol} from '../../app/tickerSymbolAdapter'
+import {purchaseStock} from '../../app/backendAdapter'
+
+import {useSelector, useDispatch} from 'react-redux'
+import { changeQuantity, changeSymbol, selectQty, selectSym } from '../../app/redux/purchaseSlice'
 
 const useStyles = makeStyles( theme => ({
   submit: {
@@ -12,31 +18,132 @@ const useStyles = makeStyles( theme => ({
 
 
 const PurchaseForm = () => {
-  const [purchaseQuantity, setQuantity] = useState(0)
-  const clickHandler = e => {
+  const dispatch = useDispatch()
+  const quantity = useSelector(selectQty)
+  const symbol = useSelector(selectSym)
+
+  const [open, setOpen] = useState(false)
+  const [error, setError] = useState(false)
+  const [errorMessages, setMessages] = useState([])
+  const [options, setOptions] = useState([])
+  const loading = open && options.length === 0
+  
+  useEffect(() => {
+    let active = true
+
+    if (!loading) {
+      return undefined
+    }
+
+    return (() => {
+      active = false
+    })
+  }, [loading])
+
+  useEffect(() => {
+    if (!open) {
+      setOptions([])
+    }
+  }, [open])
+  
+  const submissionHandler = e => {
     e.preventDefault()
+
+    console.log({symbol, quantity})
+
+    const payload = {symbol, quantity}
+    purchaseStock(payload)
+      .then(res => res.json())
+      .then(data => {
+        if (data.errors) {
+          setError(true)
+          setMessages(data.errors)
+        } else {
+          console.log(data)
+        }
+      })
+      .catch(console.error)
   }
   
   const quantityHandler = e => {
+    setError(false)
+    setMessages([])
     const {value} = e.target
     const parsedInt = parseInt(value, 10)
   
-    if (Number.isFinite(parsedInt)) setQuantity(parsedInt)
-  
-    return null;
+    if (Number.isFinite(parsedInt)) dispatch(changeQuantity(parsedInt))
+  }
+
+  const symbolHandler = e => {
+    setError(false)
+    setMessages([])
+    const {value} = e.target
+    dispatch(changeSymbol(value))
+    if (value.length > 0) {
+      getSymbol(value)
+      .then(res => res.json())
+      .then(stocks => {
+        setOptions(stocks)
+      })
+    }
+  }
+
+  const autoHandler = (e, val) => {
+    dispatch(changeSymbol(val.symbol))
+  }
+  const errorBox = (messages) => {
+    return messages.map( message => <Typography color="error" children={message} />)
   }
   const classes = useStyles()
   return (
     <Grid container spacing={2}>
+      { error ? errorBox(errorMessages) : null}
       <Grid item xs={12}>
-        <TextField 
+        <Autocomplete
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          getOptionSelected={(option, value) => option === value}
+          getOptionLabel={option => (
+            `${option.symbol} -- ${option.name}`
+          )}
+          options={options}
+          loading={loading}
+          loadingText="Searching..."
+          onChange={autoHandler}
+          renderInput={ params => (
+            <TextField 
+              {...params}
+              label="Ticker Symbol"
+              variant="outlined"
+              value={symbol}
+              style={{fontSize: "small"}}
+              onChange={symbolHandler}
+              InputProps={{
+                ...params.InputProps,
+                endAdornment: (
+                  <>
+                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                    {params.InputProps.endAdornment}
+                  </>
+                )
+              }}
+            />
+          )
+
+          }
+         />
+        {/* <TextField 
         variant="outlined"
         required
         fullWidth
         id="symbol"
         label="Ticker Symbol"
         name="symbol"
-        />
+        value={symbol}
+        onChange={symbolHandler}
+        options={options}
+        /> */}
       </Grid>
       <Grid item xs={12}>
         <TextField 
@@ -48,7 +155,7 @@ const PurchaseForm = () => {
         name="quantity"
         type="number"
         inputProps={{min: 0, step: 1}}
-        value={purchaseQuantity}
+        value={quantity}
         onChange={quantityHandler}
         />
       </Grid>
@@ -58,7 +165,7 @@ const PurchaseForm = () => {
               fullWidth
               variant="contained"
               color="primary"
-              onClick={clickHandler}
+              onClick={submissionHandler}
               className={classes.submit}
         >
           Purchase

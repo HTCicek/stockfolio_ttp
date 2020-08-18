@@ -31,7 +31,7 @@ const UserForm = (props) => {
   const history = useHistory()
 
   const [error, setError] = useState(false)
-  const [errorMessage, setMessage] = useState([])
+  const [errorMessages, setMessages] = useState([])
 
   const name = useSelector(selectName)
   const email = useSelector(selectEmail)
@@ -84,7 +84,7 @@ const UserForm = (props) => {
   const successfulLogin = data => {
     console.dir(data) // data.user.data.attributes, and data.token
     const { token } = data
-    const { name } = data.user.data.attributes
+    const { name } = data.user
     const payload = {name, token}
     dispatch(logIn(payload))
     history.push('/portfolio')
@@ -93,7 +93,7 @@ const UserForm = (props) => {
   const failedLogin = data => {
     console.error(data.errors)
     setError(true)
-    setMessage(data.errors)
+    setMessages(data.errors)
   }
 
   const errorBox = (messages) => {
@@ -101,7 +101,7 @@ const UserForm = (props) => {
   }
   return (
     <Grid container spacing={2}>
-      { error ? errorBox(errorMessage) : null}
+      { error ? errorBox(errorMessages) : null}
                   {
         // conditional rendering name and password_confirmationirmation
         registering ? (

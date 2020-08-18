@@ -17,14 +17,14 @@ const getCurrentUser = () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: localStorage.token,
+      Authorization: localStorage.getItem('token'),
     }
   })
 }
 
 const newUser = user => {
   // user must be an object containing
-  // name, email, password, password_conf
+  // name, email, password, password_confirmation
   return fetch(`${API}/users`, {
     method: 'POST',
     headers: {
@@ -35,4 +35,27 @@ const newUser = user => {
   })
 }
 
-export { logIn, getCurrentUser, newUser };
+const getUserStocks = () => {
+  return fetch(`${API}/portfolio`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    }
+  })
+}
+
+const purchaseStock = ({symbol, quantity}) => {
+  return fetch(`${API}/stocks`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('token'),
+    },
+    body: JSON.stringify({ symbol, quantity })
+  })
+}
+
+export { logIn, getCurrentUser, newUser, getUserStocks, purchaseStock };

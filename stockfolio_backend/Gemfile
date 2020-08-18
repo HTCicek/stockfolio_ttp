@@ -13,7 +13,8 @@ gem 'puma', '~> 4.1'
 gem 'jwt'
 
 # JSON API gem for serialization of outgoing frontend and desrialization of incoming data
-gem 'jsonapi.rb'
+# gem 'jsonapi.rb'
+gem 'blueprinter'
 
 # HTTP client used to abstract calls
 gem 'faraday'

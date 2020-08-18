@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_one :portfolio
+  has_many :stocks, through: :portfolio
 
   # BCrypt macro for passwords
   has_secure_password
@@ -8,13 +10,13 @@ class User < ApplicationRecord
 
   ## Got caught up doing work on a different feature
   # def purchase(stock_code:, qty: 1)
-
+    
   # end
   
   # private
 
   # def enough_funds?(value)
-  #   !!balance >= value
+  #   !!(balance >= value)
   # end
   
   # def purchase_stock(stock_code:)

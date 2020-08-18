@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -7,43 +7,46 @@ import Transactions from './components/routes/Transactions'
 import Portfolio from './components/routes/Portfolio'
 import Welcome from './components/routes/Welcome'
 import SignIn from './components/routes/SignIn'
-import { Grid, AppBar, Toolbar } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
-import { useSelector } from 'react-redux'
-import { isLoggedIn } from './app/redux/authSlice'
-// import {getCurrentUser} from './app/backendAdapter'
+import { useSelector, useDispatch } from 'react-redux'
+import { isLoggedIn, logOut, logIn } from './app/redux/authSlice'
+import {getCurrentUser} from './app/backendAdapter'
+
 import PrivateRoute from './components/routes/PrivateRoute';
+import Nav from './components/sections/Nav';
 
 function App() {
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('token')) {
-  //     getCurrentUser()
-  //     .then(res => res.json())
-  //     .then( data => {
-  //       if (data.errors){
-  //         console.error(data.errors)
-  //       } else {
-  //         const { token } = localStorage.getItem('token')
-  //         const { name } = data.user.data.attributes
-  //         const payload = {token, name}
-  //         dispatch(logIn(payload))
-  //       }
-  //     })
-  //   }
-  //   return (() => dispatch(logOut))}, [])
+  // log in if there's an existing token
+  useEffect(() => {
+    const existingToken = localStorage.getItem('token')
+    
+    if (existingToken) {
+      getCurrentUser()
+      .then(res => res.json())
+      .then( data => {
+        if (data.errors){
+          console.error(data.errors)
+          dispatch(logOut())
+        } else {
+          const { token } = data
+          const { name } = data.user
+          const authPayload = {token, name}
+          dispatch(logIn(authPayload))
+        }
+      })
+    }
+    return (() => dispatch(logOut()))}, [])
 
   const loggedIn = useSelector(isLoggedIn)
-  
+
+
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-
-        </Toolbar>
-      </AppBar>
+      <Nav />
       <Grid container direction="row" alignItems="center" justify="center">
         <Switch>
 
