@@ -8,11 +8,11 @@ export const purchaseSlice = createSlice({
   },
   reducers: {
     changeQuantity: (state, action) => {
-      const {quantity} = action.payload
+      const quantity = action.payload
       return {...state, quantity }
     },
     changeSymbol: (state, action) => {
-      const {symbol} = action.payload
+      const symbol = action.payload
       return {...state, symbol}
     }
   }

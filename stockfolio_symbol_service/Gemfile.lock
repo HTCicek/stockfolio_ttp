@@ -4,6 +4,9 @@ GEM
     json (2.3.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
+    nio4r (2.5.2)
+    puma (4.3.5)
+      nio4r (~> 2.0)
     rack (2.2.3)
     rack-protection (2.0.8.1)
       rack
@@ -13,6 +16,7 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.8.1)
       tilt (~> 2.0)
+    sinatra-cors (1.2.0)
     tilt (2.0.10)
 
 PLATFORMS
@@ -20,7 +24,9 @@ PLATFORMS
 
 DEPENDENCIES
   json
+  puma
   sinatra
+  sinatra-cors
 
 RUBY VERSION
    ruby 2.7.1p83

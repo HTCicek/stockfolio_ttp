@@ -1,6 +1,12 @@
 require "sinatra"
+require "sinatra/cors"
 require 'net/ftp'
 require 'json'
+
+# CORS settings
+set :allow_origin, "http://localhost:3000"
+set :allow_methods, "GET"
+set :allow_headers, "content-type"
 
 # File Update
 ftp_nas = Net::FTP.new('ftp.nasdaqtrader.com')

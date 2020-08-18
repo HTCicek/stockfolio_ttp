@@ -85,7 +85,7 @@ Web Client built using React, bootstrapped with the create-react-app redux templ
 - Redux
   - State management
 - Material-UI
-  - Composable UI Library 
+  - Composable UI Library
 - React Router Dom
   - Used to define endpoints/switch pages
 - react-helmet

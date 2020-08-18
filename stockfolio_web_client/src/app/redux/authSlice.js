@@ -12,7 +12,7 @@ export const authSlice = createSlice({
       const { token, name } = action.payload
       localStorage.setItem('token', token)
       localStorage.setItem("loggedIn", true)
-      return {...state, token: token, loggedIn: true, name}
+      return {...state, token, name, loggedIn: true}
     },
     logOut: state => {
       localStorage.removeItem('token')
