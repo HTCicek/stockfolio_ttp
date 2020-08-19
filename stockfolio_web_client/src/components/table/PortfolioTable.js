@@ -95,10 +95,10 @@ const PortfolioTable = () => {
             <TableCell >{companyName}</TableCell>
             <TableCell align="right">{symbol}</TableCell>
             <TableCell align="right">{quantity}</TableCell>
-            <TableCell align="right">{(comparePrice / 10).toFixed(2)}</TableCell>
+            <TableCell align="right">{(comparePrice / 100).toFixed(2)}</TableCell>
             <TableCell align="right" >
               <Typography className={colorHandler(currentPrice, comparePrice)} >
-              {(currentPrice / 10).toFixed(2)}
+              {(currentPrice / 100).toFixed(2)}
               </Typography>
               </TableCell>
           </TableRow>
@@ -119,7 +119,7 @@ const PortfolioTable = () => {
             <TableCell align="left">Balance:</TableCell>
             <TableCell>{(balance / 100).toFixed(2)}</TableCell>
             <TableCell align="left">Current Portfolio Value:</TableCell>
-            <TableCell>{(portfolioVal / 100).toFixed(2)}</TableCell>
+            <TableCell>{(portfolioVal / 10000).toFixed(2)}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Company Name</TableCell>

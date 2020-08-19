@@ -354,8 +354,8 @@ BBIO|BridgeBio Pharma, Inc. - Common Stock|Q|N|N|100|N|N
 BBQ|BBQ Holdings, Inc.  - Common Stock|Q|N|N|100|N|N
 BBSI|Barrett Business Services, Inc. - Common Stock|Q|N|N|100|N|N
 BCBP|BCB Bancorp, Inc. (NJ) - Common Stock|G|N|N|100|N|N
-BCDA|BioCardia, Inc. - Common Stock|S|N|D|100|N|N
-BCDAW|BioCardia, Inc. - Warrant|S|N|D|100|N|N
+BCDA|BioCardia, Inc. - Common Stock|S|N|N|100|N|N
+BCDAW|BioCardia, Inc. - Warrant|S|N|N|100|N|N
 BCEL|Atreca, Inc. - Class A Common Stock|Q|N|N|100|N|N
 BCLI|Brainstorm Cell Therapeutics Inc. - Common Stock|S|N|N|100|N|N
 BCML|BayCom Corp - Common Stock|Q|N|N|100|N|N
@@ -3286,7 +3286,7 @@ TTWO|Take-Two Interactive Software, Inc. - Common Stock|Q|N|N|100|N|N
 TUR|iShares MSCI Turkey ETF|G|N|N|100|Y|N
 TURN|180 Degree Capital Corp. - Common Stock|G|N|N|100|N|N
 TUSA|First Trust Total US Market AlphaDEX ETF|G|N|N|100|Y|N
-TUSK|Mammoth Energy Services, Inc. - Common Stock|Q|N|D|100|N|N
+TUSK|Mammoth Energy Services, Inc. - Common Stock|Q|N|N|100|N|N
 TVTY|Tivity Health, Inc. - Common Stock|Q|N|N|100|N|N
 TW|Tradeweb Markets Inc. - Class A Common Stock|Q|N|N|100|N|N
 TWIN|Twin Disc, Incorporated - Common Stock|Q|N|N|100|N|N
@@ -3614,4 +3614,4 @@ ZXYZ.A|Nasdaq Symbology Test Common Stock|Q|Y|N|100||N
 ZXZZT|NASDAQ TEST STOCK|G|Y|N|100||N
 ZYNE|Zynerba Pharmaceuticals, Inc. - Common Stock|G|N|N|100|N|N
 ZYXI|Zynex, Inc. - Common Stock|S|N|N|100|N|N
-File Creation Time: 0818202015:41|||||||
+File Creation Time: 0818202021:32|||||||

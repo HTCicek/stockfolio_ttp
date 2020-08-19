@@ -1,8 +1,22 @@
 # Stockfolio
 
-**BLUF** Please build locally, `docker-compose` isn't fully up and running yet.
+**BLUF** All you need is the docker-compose file! Find the docker images [here](https://hub.docker.com/repository/docker/htcicek/stockfolio_ttp), on dockerhub!
 
-`username: htcicek@email.com password: 1234`, or create your own.
+```sh
+curl https://raw.githubusercontent.com/HTCicek/stockfolio_ttp/master/docker-compose-built.yml > docker-compose-built.yml
+
+docker-compose -f docker-compose-built.yml up
+```
+
+Access web-client on `http://localhost:3000`
+
+sign in with:
+
+username: htcicek@email.com
+
+password: 1234
+
+or create your own
 
 ## Table of Contents
 
@@ -138,6 +152,12 @@ Built using Sinatra. Pulls up-to-date symbol data from ftp.nasdaqtrader.com in o
 Work that should be considered beyond the minimum viable product specs.
 
 ### Client
+
+#### Bugs
+
+- [ ] On purchase, the purchase isn't reflected in either the transaction or portfolio panes until window reload
+  - [ ] POTENTIAL FIX: The components don't want to reload, can be fixed by mapping global state to props
+  - [ ] POTENTIAL FIX: lift state to `App` and pass down the changes through props/state, essentially removing redux
 
 #### Portfolio
 

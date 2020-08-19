@@ -11,7 +11,7 @@ RUN gem install bundler --no-doc \
 RUN set -ex \
   && apk --update add --no-cache --virtual build-dependencies \
             build-base libc-dev linux-headers tzdata \
-            openssl-dev sqlite-dev \
+            openssl-dev sqlite sqlite-dev \
   && apk add --no-cache \
   libxml2-dev \
   libxslt-dev \
@@ -28,5 +28,6 @@ EXPOSE 4000
 
 WORKDIR /app
 RUN bundle install
-RUN RAILS_ENV=production
-RUN rails db:migrate db:seed
+RUN rails db:create RAILS_ENV=production
+RUN rails db:migrate RAILS_ENV=production
+RUN rails db:seed RAILS_ENV=production

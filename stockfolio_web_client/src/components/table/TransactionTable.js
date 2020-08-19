@@ -62,7 +62,7 @@ const TransactionTable = () => {
         <TableRow key={id}>
           <TableCell>{companyName}</TableCell>
           <TableCell align="right">{symbol}</TableCell>
-          <TableCell align="right">{(purchasePrice/10).toFixed(2)}</TableCell>
+          <TableCell align="right">{(purchasePrice/100).toFixed(2)}</TableCell>
           <TableCell align="right">{readableTime}</TableCell>
         </TableRow>
       )

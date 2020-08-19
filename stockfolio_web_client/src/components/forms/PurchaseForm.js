@@ -66,6 +66,10 @@ const PurchaseForm = () => {
           const balance = parseInt(data.user.balance, 10)
           dispatch(updateBalance({balance}))
           dispatch(updatePortfolio(stocksPayload))
+          
+          // temporary fix
+          // window.location.reload()
+
         }
       })
       .catch(console.error)
