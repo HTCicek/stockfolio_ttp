@@ -61,9 +61,10 @@ const PurchaseForm = () => {
           setError(true)
           setMessages(data.errors)
         } else {
-          const { current_value: currentValue, stocks} = data.user.portfolio
+          console.dir(data)
+          const { current_value: currentValue, stocks} = data.portfolio
           const stocksPayload = {currentValue, stocks}
-          const balance = parseInt(data.user.balance, 10)
+          const balance = parseInt(data.balance, 10)
           dispatch(updateBalance({balance}))
           dispatch(updatePortfolio(stocksPayload))
           

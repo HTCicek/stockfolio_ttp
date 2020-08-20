@@ -4,7 +4,7 @@ require 'net/ftp'
 require 'json'
 
 # CORS settings
-set :allow_origin, "*"
+set :allow_origin, "http://localhost:3000"
 set :allow_methods, "GET"
 set :allow_headers, "content-type"
 

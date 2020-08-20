@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useSelector} from 'react-redux'
+import {useSelector, shallowEqual} from 'react-redux'
 
 import { selectStocks, selectPortValue } from '../../app/redux/stockSlice'
 
@@ -74,7 +74,7 @@ const transformData = array => {
 
 
 const PortfolioTable = () => {
-  const stocks = useSelector(selectStocks)
+  const stocks = useSelector(selectStocks, shallowEqual)
 
   const mappingStocks = transformData(stocks)
 

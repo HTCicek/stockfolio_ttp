@@ -16,6 +16,9 @@ WORKDIR /app
 RUN bundle install
 RUN apk del .ruby-bundle-deps
 
-EXPOSE 4567
+COPY ./docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
-CMD ["bundle" "exec" "ruby" "application.rb" "-p" "4567" "-s" "Puma" "-e" "production"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ruby application.rb -p 4567 -s Puma -e production

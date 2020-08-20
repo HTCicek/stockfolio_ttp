@@ -3,3 +3,11 @@ build:
     web: stockfolio_web_client/Dockerfile.web
     sym: stockfolio_symbol_service/Dockerfile.sym
     api: stockfolio_backend/Dockerfile.api
+# run:
+  # api: 
+    # command: bundle exec rails s -p 4000 -b '0.0.0.0'
+  # sym: 
+    # command: bundle exec ruby application.rb -p 4567 -s Puma -e production
+  # web: 
+    # command: envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+

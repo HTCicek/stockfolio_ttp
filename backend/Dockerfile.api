@@ -22,7 +22,6 @@ RUN set -ex \
 
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 4000
 
@@ -34,4 +33,6 @@ RUN rails db:seed RAILS_ENV=production
 ENV RAILS_ENV=production
 ENV RAILS_LOG_TO_STDOUT=true
 
-CMD ["rails" "s" "-p" "4000" "-b" "0.0.0.0"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD rails s -p 4000 -b '0.0.0.0'
