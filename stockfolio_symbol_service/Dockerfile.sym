@@ -1,7 +1,5 @@
 FROM ruby:2.7.1-alpine
 
-EXPOSE 4567
-
 WORKDIR /app
 COPY . /app
 
@@ -17,3 +15,7 @@ RUN set -ex \
 WORKDIR /app
 RUN bundle install
 RUN apk del .ruby-bundle-deps
+
+EXPOSE 4567
+
+CMD ["bundle" "exec" "ruby" "application.rb" "-p" "4567" "-s" "Puma" "-e" "production"]

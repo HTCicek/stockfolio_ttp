@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: stockfolio_web_client/Dockerfile.web
+    sym: stockfolio_symbol_service/Dockerfile.sym
+    api: stockfolio_backend/Dockerfile.api

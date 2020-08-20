@@ -31,3 +31,7 @@ RUN bundle install
 RUN rails db:create RAILS_ENV=production
 RUN rails db:migrate RAILS_ENV=production
 RUN rails db:seed RAILS_ENV=production
+ENV RAILS_ENV=production
+ENV RAILS_LOG_TO_STDOUT=true
+
+CMD ["rails" "s" "-p" "4000" "-b" "0.0.0.0"]
