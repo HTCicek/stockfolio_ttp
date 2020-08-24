@@ -1,3 +1,4 @@
+// const API = 'https://stockfolio-backend-api.herokuapp.com'
 const API = 'http://localhost:4000'
 
 const logIn = (email, password) => {
