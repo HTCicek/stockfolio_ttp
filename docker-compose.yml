@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   symbol_service:
-    build: ./stockfolio_symbol_service 
+    build: ./symbol_service 
       # context: ./stockfolio_symbol_service 
       # dockerfile: Dockerfile
     hostname: symbol_service
@@ -9,7 +9,7 @@ services:
     ports:
       - "4567:4567"
   backend:
-    build: ./stockfolio_backend 
+    build: ./backend 
       # context: ./stockfolio_backend 
       # dockerfile: Dockerfile
     hostname: backend
@@ -20,7 +20,7 @@ services:
     ports:
       - "4000:4000"
   web_client:
-    build: ./stockfolio_web_client
+    build: ./web_client
       # context: ./stockfolio_web_client
       # dockerfile: Dockerfile
     hostname: web_client
