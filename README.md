@@ -84,7 +84,7 @@ Web Client built using React, bootstrapped with the create-react-app redux templ
 
 #### Design & Style Guide
 
-![Provided Style Guide](/stockfolio_web_client/public/style_guide.png)
+![Provided Style Guide](/web_client/public/style_guide.png)
 
 ##### Pages (client routes)
 
