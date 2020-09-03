@@ -16,6 +16,6 @@ Perform a search on all tickers by symbol.
 
 Note: Used to perform a pseudo-fuzzy-search on symbol and name, but the results of common words became unreliable.
 
-## Develoepr(s)
+## Developers(s)
 
 Turcan Cicek

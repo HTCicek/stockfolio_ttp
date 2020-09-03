@@ -84,7 +84,7 @@ Web Client built using React, bootstrapped with the create-react-app redux templ
 
 #### Design & Style Guide
 
-![Provided Style Guide](/stockfolio_web_client/public/style_guide.png)
+![Provided Style Guide](/web_client/public/style_guide.png)
 
 ##### Pages (client routes)
 
@@ -155,9 +155,7 @@ Work that should be considered beyond the minimum viable product specs.
 
 #### Bugs
 
-- [ ] On purchase, the purchase isn't reflected in either the transaction or portfolio panes until window reload
-  - [ ] POTENTIAL FIX: The components don't want to reload, can be fixed by mapping global state to props
-  - [ ] POTENTIAL FIX: lift state to `App` and pass down the changes through props/state, essentially removing redux
+- [x] On purchase, the purchase isn't reflected in either the transaction or portfolio panes until window reload
 
 #### Portfolio
 
@@ -165,11 +163,18 @@ Work that should be considered beyond the minimum viable product specs.
 - [ ] Provide an interface for users to add funds via the same back endpoint that updates user balance
 - [ ] Provide an interface for users to liquidate their stock
 
-### Service
+### Backend API
 
 #### Persistence
 
-- [ ] Implement PostgreSQL for production server
+- [x] Implement PostgreSQL for production server
+
+### Symbol Service API
+
+#### Data Store
+
+- [ ] Implement cron jobs using `whenever` to update the symbols list periodically
+- [ ] Include current prices (expensive on the iexcloud api side)
 
 ## Developer(s)
 
