@@ -1,8 +1,8 @@
 build:
   docker:
-    web: stockfolio_web_client/Dockerfile.web
-    sym: stockfolio_symbol_service/Dockerfile.sym
-    api: stockfolio_backend/Dockerfile.api
+    web: web_client/Dockerfile.web
+    sym: symbol_service/Dockerfile.sym
+    api: backend/Dockerfile.api
 # run:
   # api: 
     # command: bundle exec rails s -p 4000 -b '0.0.0.0'
