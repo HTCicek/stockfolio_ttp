@@ -10,13 +10,15 @@ docker-compose -f docker-compose-built.yml up
 
 Access web-client on `http://localhost:3000`
 
-sign in with:
+sign in using:
 
+```text
 username: htcicek@email.com
 
 password: 1234
+```
 
-or create your own
+or create your own!
 
 ## Table of Contents
 
